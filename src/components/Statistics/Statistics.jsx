@@ -1,30 +1,38 @@
 import PropTypes from 'prop-types';
-import Stat from './Stat';
-import { Item, List, Percentage, Total, Wrapper } from './Statistics.styled';
+import { FcLike, FcDislike, FcLikePlaceholder } from 'react-icons/fc';
+import { ListStatistic, ItemStatistic, ItemIcon } from './Statistics.styled';
 
-const Statistics = ({ total, positivePercentage, options }) => {
+export const Statistics = ({ good, neutral, bad, positive, total }) => {
   return (
-    <Wrapper>
-      <List>
-        {options.map(({ key, value }) => (
-          <Item key={key}>
-            <Stat label={key} value={value} />
-          </Item>
-        ))}
-      </List>
-
-      <Total>Total: {total}</Total>
-      <Percentage>Positive feedback: {positivePercentage}%</Percentage>
-    </Wrapper>
+    <ListStatistic>
+      <ItemStatistic>
+        <ItemIcon>
+          <FcLike />
+        </ItemIcon>
+        Good: {good}
+      </ItemStatistic>
+      <ItemStatistic>
+        <ItemIcon>
+          <FcLikePlaceholder />
+        </ItemIcon>
+        Neutral: {neutral}
+      </ItemStatistic>
+      <ItemStatistic>
+        <ItemIcon>
+          <FcDislike />
+        </ItemIcon>
+        Bad: {bad}
+      </ItemStatistic>
+      <ItemStatistic>Total: {total}</ItemStatistic>
+      <ItemStatistic>Positive feedback: {positive}%</ItemStatistic>
+    </ListStatistic>
   );
 };
-
-export default Statistics;
 
 Statistics.propTypes = {
   good: PropTypes.number.isRequired,
   neutral: PropTypes.number.isRequired,
   bad: PropTypes.number.isRequired,
+  positive: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
-  positivePercentage: PropTypes.string.isRequired,
 };
